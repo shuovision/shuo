@@ -10,11 +10,17 @@ export default function About() {
 
       {/* 導覽列 */}
       <nav className="p-6 md:px-20 flex justify-between items-center sticky top-0 bg-[#0F0F0F]/90 backdrop-blur-md z-50">
-        <Link href="/">
-          <div className="flex items-center gap-3 cursor-pointer">
-            <img src="/logo.png" alt="Logo" className="h-7 w-auto" />
-            <span className="text-[#D4AF37] font-bold tracking-[0.2em] text-lg">SHUO VISION</span>
-          </div>
+{/* 更新後的導覽列選項 */}
+<div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] md:text-xs uppercase tracking-[0.15em] items-center font-bold">
+  <Link href="/about"><a className="hover:text-[#D4AF37]">About</a></Link>
+  <Link href="/services"><a className="hover:text-[#D4AF37]">Services</a></Link>
+  <Link href="/products"><a className="hover:text-[#D4AF37]">Products</a></Link> {/* 新增這行 */}
+  <Link href="/contact">
+    <a className="px-5 py-2 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all rounded-full bg-[#D4AF37]/5">
+      Contact
+    </a>
+  </Link>
+</div>
         </Link>
       </nav>
 
