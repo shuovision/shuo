@@ -26,11 +26,17 @@ export default function Home() {
       {/* 強制顯示的導覽列 */}
       <nav className="p-6 border-b border-white/10 flex justify-between items-center bg-black sticky top-0 z-50">
         <div className="text-[#D4AF37] font-bold tracking-widest text-xl">SHUO VISION</div>
-        <div className="flex gap-6 text-[11px] uppercase tracking-widest">
-          <Link href="/about"><a>About</a></Link>
-          <Link href="/services"><a>Services</a></Link>
-          <Link href="/contact"><a className="text-[#D4AF37]">Contact</a></Link>
-        </div>
+<div className="flex gap-6 text-[11px] uppercase tracking-widest">
+  <Link href="/about">
+    <a className="hover:text-[#D4AF37] transition-colors">About</a>
+  </Link>
+  <Link href="/services">
+    <a className="hover:text-[#D4AF37] transition-colors">Services</a>
+  </Link>
+  <Link href="/contact">
+    <a className="text-[#D4AF37] font-bold">Contact</a>
+  </Link>
+</div>
       </nav>
 
       <div className="p-10 md:p-20">
