@@ -63,15 +63,17 @@ export default function Home() {
           <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></div> {/* 模擬硬體指示燈 */}
           <span className="text-[#D4AF37] font-bold tracking-[0.2em] text-sm md:text-xl font-mono">SHUO_VISION_LAB</span>
         </div>
-        <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] md:text-xs uppercase tracking-[0.15em] items-center font-bold">
-          <Link href="/about"><a className="hover:text-[#D4AF37] transition-all">About</a></Link>
-          <Link href="/services"><a className="hover:text-[#D4AF37] transition-all">Services</a></Link>
-          <Link href="/contact">
-            <a className="px-5 py-2 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-500 rounded-full bg-[#D4AF37]/5">
-              Contact_Us
-            </a>
-          </Link>
-        </div>
+{/* 更新後的導覽列選項 */}
+<div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] md:text-xs uppercase tracking-[0.15em] items-center font-bold">
+  <Link href="/about"><a className="hover:text-[#D4AF37]">About</a></Link>
+  <Link href="/services"><a className="hover:text-[#D4AF37]">Services</a></Link>
+  <Link href="/products"><a className="hover:text-[#D4AF37]">Products</a></Link> {/* 新增這行 */}
+  <Link href="/contact">
+    <a className="px-5 py-2 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all rounded-full bg-[#D4AF37]/5">
+      Contact
+    </a>
+  </Link>
+</div>
       </nav>
 
       {/* Hero Section */}
