@@ -20,79 +20,77 @@ export default function Home() {
           .select("*")
           .order("created_at", { ascending: false });
         if (!error) setWorks(data || []);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+      } catch (err) { console.error(err); } finally { setLoading(false); }
     }
     fetchWorks();
   }, []);
 
   return (
-    <div className="bg-background min-h-screen text-white selection:bg-primary">
+    <div className="bg-background min-h-screen text-white selection:bg-primary selection:text-black">
       <Head>
         <title>SHUO VISION | 碩果工作室</title>
       </Head>
 
-      {/* 強化版導覽列 */}
-      <nav className="p-6 md:px-20 flex justify-between items-center sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-white/5">
+      {/* 修正後的導覽列：確保手機也能看到按鈕 */}
+      <nav className="p-4 md:px-20 flex flex-col md:flex-row justify-between items-center sticky top-0 bg-background/90 backdrop-blur-md z-50 border-b border-white/5 gap-4">
         <div className="flex items-center gap-3">
-          <img src="/logo.png" alt="Logo" className="h-8 w-auto" />
-          <span className="text-primary font-bold tracking-[0.3em] text-lg">SHUO VISION</span>
+          <img src="/logo.png" alt="Logo" className="h-7 w-auto" />
+          <span className="text-primary font-bold tracking-[0.3em] text-base md:text-lg">SHUO VISION</span>
         </div>
         
-        {/* 這邊就是你的分頁按鈕 */}
-        <div className="flex gap-6 md:gap-10 text-[11px] uppercase tracking-[0.2em] items-center">
-          <Link href="/about">
-            <a className="hover:text-primary transition-colors cursor-pointer">About</a>
-          </Link>
-          <Link href="/services">
-            <a className="hover:text-primary transition-colors cursor-pointer">Services</a>
-          </Link>
+        {/* 選項區：移除 hidden，讓手機也看得到 */}
+        <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase tracking-[0.2em] items-center">
+          <Link href="/about"><a className="hover:text-primary transition-colors">About</a></Link>
+          <Link href="/services"><a className="hover:text-primary transition-colors">Services</a></Link>
           <Link href="/contact">
-            <a className="px-5 py-2 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all rounded-full">
+            <a className="px-4 py-1.5 border border-primary/40 text-primary hover:bg-primary hover:text-black transition-all rounded-full">
               Contact
             </a>
           </Link>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="h-[80vh] flex flex-col justify-center px-8 md:px-20">
-        <h2 className="text-accent text-xs tracking-[0.5em] mb-6 uppercase opacity-60">Creative Studio</h2>
-        <h1 className="text-6xl md:text-8xl font-light tracking-tighter leading-none mb-8">
+      {/* Hero Section */}
+      <section className="h-[70vh] flex flex-col justify-center px-8 md:px-20">
+        <h2 className="text-accent text-[10px] tracking-[0.5em] mb-4 uppercase opacity-60 font-light">Professional Creative Studio</h2>
+        <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-none mb-8">
           以願景，<br />
           <span className="text-primary font-serif italic">凝結成果。</span>
         </h1>
-        <div className="w-20 h-[1px] bg-primary"></div>
+        <div className="w-16 h-[1px] bg-primary"></div>
       </section>
 
-      {/* 作品區 */}
+      {/* 作品展示區 */}
       <section className="py-20 px-8 md:px-20">
-        <h3 className="text-xl tracking-[0.3em] mb-12 text-primary/80">SELECTED VISIONS</h3>
+        <h3 className="text-lg md:text-xl tracking-[0.4em] mb-12 text-primary font-bold">SELECTED VISIONS</h3>
         {loading ? (
-          <div className="text-gray-600 animate-pulse text-xs tracking-widest">LOADING...</div>
-        ) : (
+          <div className="text-gray-600 animate-pulse text-[10px] tracking-widest uppercase">Fetching Visions...</div>
+        ) : works.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {works.map((work) => (
-              <div key={work.id} className="group">
-                <div className="relative aspect-video overflow-hidden bg-secondary mb-4 border border-white/5">
+            {works.map((work, index) => (
+              <div key={work.id} className="group cursor-pointer">
+                <div className="relative aspect-video overflow-hidden bg-secondary mb-4 border border-white/5 group-hover:border-primary/50 transition-all">
                   <iframe
                     className="w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700"
                     src={`https://www.youtube.com/embed/${work.video_id}`}
-                    frameBorder="0"
-                    allowFullScreen
+                    frameBorder="0" allowFullScreen
                   ></iframe>
                 </div>
-                <h4 className="text-lg font-light">{work.title}</h4>
+                <div className="flex justify-between items-end">
+                  <h4 className="text-lg font-light">{work.title}</h4>
+                  <span className="text-[9px] text-gray-700 font-mono">/ 0{index + 1}</span>
+                </div>
               </div>
             ))}
+          </div>
+        ) : (
+          <div className="py-20 text-center border border-dashed border-white/10 rounded-lg">
+            <p className="text-gray-500 italic tracking-[0.2em] text-[10px] uppercase">正在籌備精彩作品...</p>
           </div>
         )}
       </section>
 
-      <footer className="py-20 text-center opacity-30 text-[10px] tracking-widest">
+      <footer className="py-20 text-center opacity-20 text-[9px] tracking-[0.3em] uppercase">
         © 2026 SHUO VISION STUDIO.
       </footer>
     </div>
