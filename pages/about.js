@@ -8,26 +8,36 @@ export default function About() {
         <title>About | SHUO VISION</title>
       </Head>
 
-      {/* 導覽列 */}
-      <nav className="p-6 md:px-20 flex justify-between items-center sticky top-0 bg-[#0F0F0F]/90 backdrop-blur-md z-50">
-{/* 更新後的導覽列選項 */}
-<div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] md:text-xs uppercase tracking-[0.15em] items-center font-bold">
-  <Link href="/about"><a className="hover:text-[#D4AF37]">About</a></Link>
-  <Link href="/services"><a className="hover:text-[#D4AF37]">Services</a></Link>
-  <Link href="/products"><a className="hover:text-[#D4AF37]">Products</a></Link> {/* 新增這行 */}
-  <Link href="/contact">
-    <a className="px-5 py-2 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all rounded-full bg-[#D4AF37]/5">
-      Contact
-    </a>
-  </Link>
-</div>
+      {/* 導覽列 - 修正語法結構 */}
+      <nav className="p-6 md:px-20 flex flex-col md:flex-row justify-between items-center sticky top-0 bg-[#0F0F0F]/90 backdrop-blur-md z-50 border-b border-white/5 gap-4">
+        {/* 左側 Logo 區 */}
+        <Link href="/">
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <img src="/logo.png" alt="Logo" className="h-7 w-auto group-hover:scale-110 transition-transform" />
+            <span className="text-[#D4AF37] font-bold tracking-[0.2em] text-lg font-mono">SHUO_VISION</span>
+          </div>
         </Link>
+
+        {/* 右側選單 - 包含 Products */}
+        <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-[10px] md:text-xs uppercase tracking-[0.15em] items-center font-bold">
+          <Link href="/about"><a className="text-[#D4AF37]">About</a></Link>
+          <Link href="/services"><a className="hover:text-[#D4AF37] transition-all">Services</a></Link>
+          <Link href="/products"><a className="hover:text-[#D4AF37] transition-all">Products</a></Link>
+          <Link href="/contact">
+            <a className="px-5 py-2 border border-[#D4AF37]/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all rounded-full bg-[#D4AF37]/5">
+              Contact
+            </a>
+          </Link>
+        </div>
       </nav>
 
-      <main className="max-w-4xl mx-auto px-8 py-20 md:py-40">
+      <main className="max-w-4xl mx-auto px-8 py-20 md:py-40 relative">
+        {/* 背景裝飾光暈 */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-[#D4AF37]/5 rounded-full blur-[100px] -z-10"></div>
+
         {/* 核心標語 */}
         <section className="mb-32">
-          <h2 className="text-[#D4AF37] text-xs tracking-[0.5em] mb-8 uppercase opacity-60">IoT & Embedded Systems Lab</h2>
+          <h2 className="text-[#D4AF37] text-xs tracking-[0.5em] mb-8 uppercase opacity-60 font-mono">IoT & Embedded Systems Lab</h2>
           <h1 className="text-4xl md:text-6xl font-light leading-tight mb-12 tracking-tight">
             以嵌入式核心，<br />
             連結<span className="text-[#D4AF37] font-serif italic"> 智慧生活的願景。</span>
@@ -56,7 +66,7 @@ export default function About() {
         </section>
 
         {/* 技術核心項目 */}
-        <section className="mt-40 py-20 border-y border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <section className="mt-40 py-20 border-y border-white/5 grid grid-cols-2 md:grid-cols-4 gap-8 text-center bg-white/5 rounded-lg">
           <div>
             <div className="text-[#D4AF37] text-xl mb-2 font-mono">ESP32</div>
             <div className="text-[10px] tracking-widest uppercase">多元控制中心</div>
@@ -90,7 +100,7 @@ export default function About() {
         </div>
       </main>
 
-      <footer className="py-20 text-center opacity-20 text-[9px] tracking-[0.3em] uppercase">
+      <footer className="py-20 text-center opacity-20 text-[9px] tracking-[0.3em] uppercase border-t border-white/5">
         © 2026 SHUO VISION STUDIO. EMBEDDED SOLUTIONS.
       </footer>
     </div>
