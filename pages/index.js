@@ -23,12 +23,10 @@ export default function Home() {
     <div className="bg-black min-h-screen text-white font-sans">
       <Head><title>SHUO VISION</title></Head>
 
-      {/* 導覽列：強制顯示在最上方 */}
-      <nav className="p-6 border-b border-white/10 flex justify-between items-center bg-black">
+      {/* 強制顯示的導覽列 */}
+      <nav className="p-6 border-b border-white/10 flex justify-between items-center bg-black sticky top-0 z-50">
         <div className="text-[#D4AF37] font-bold tracking-widest text-xl">SHUO VISION</div>
-        
-        {/* 選單按鈕 */}
-        <div className="flex gap-6 text-xs uppercase tracking-widest">
+        <div className="flex gap-6 text-[11px] uppercase tracking-widest">
           <Link href="/about"><a>About</a></Link>
           <Link href="/services"><a>Services</a></Link>
           <Link href="/contact"><a className="text-[#D4AF37]">Contact</a></Link>
@@ -36,13 +34,15 @@ export default function Home() {
       </nav>
 
       <div className="p-10 md:p-20">
-        <h1 className="text-5xl md:text-8xl font-light mb-10">以願景，<br/><span className="text-[#D4AF37] italic">凝結成果。</span></h1>
+        <h1 className="text-5xl md:text-8xl font-light mb-10 leading-tight">以願景，<br/><span className="text-[#D4AF37] italic font-serif">凝結成果。</span></h1>
         
-        {/* 作品清單 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-20">
           {works.length > 0 ? works.map(w => (
-            <div key={w.id} className="aspect-video bg-zinc-900 border border-white/5">
-              <iframe className="w-full h-full" src={`https://www.youtube.com/embed/${w.video_id}`} frameBorder="0" allowFullScreen></iframe>
+            <div key={w.id} className="group">
+              <div className="aspect-video bg-zinc-900 border border-white/5 overflow-hidden">
+                <iframe className="w-full h-full grayscale group-hover:grayscale-0 transition-all" src={`https://www.youtube.com/embed/${w.video_id}`} frameBorder="0" allowFullScreen></iframe>
+              </div>
+              <h4 className="mt-4 text-lg font-light">{w.title}</h4>
             </div>
           )) : <p className="text-zinc-600 italic">正在籌備精彩作品...</p>}
         </div>
