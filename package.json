@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.1",
+    "tsparticles": "^2.12.0",
     "react-tsparticles": "^2.12.2",
     "tsparticles-engine": "^2.12.0",
     "@headlessui/react": "^1.6.6",
