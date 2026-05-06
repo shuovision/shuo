@@ -48,7 +48,7 @@ export default function About() {
             </h1>
             <div className="w-20 h-[2px] bg-[#D4AF37] mb-12"></div>
             <p className="text-zinc-400 leading-relaxed tracking-wide text-lg md:text-xl max-w-2xl">
-              碩果影像實驗室 (SHUO VISION LAB) 專注於將市場頂尖的 SoC 技術與實際產業需求無縫對接。
+              碩果科研 (SHUO VISION LAB) 專注於將市場頂尖的 SoC 技術與實際產業需求無縫對接。
               我們不只做整合，更追求在極限環境下的系統表現。
             </p>
           </div>
