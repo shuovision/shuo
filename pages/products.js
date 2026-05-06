@@ -35,16 +35,16 @@ export default function Products() {
       {/* 燈箱 Modal */}
       {selectedImg && (
         <div 
-          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-20 cursor-zoom-out"
+          className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
           onClick={() => setSelectedImg(null)}
         >
           <img 
             src={selectedImg} 
-            className="max-w-full max-h-[90vh] object-contain shadow-[0_0_60px_rgba(212,175,55,0.1)]"
+            className="max-w-full max-h-[85vh] object-contain shadow-[0_0_50px_rgba(212,175,55,0.2)] border border-white/10"
             alt="Full Preview"
           />
-          <div className="absolute top-8 right-8 text-[#D4AF37] font-mono text-xs cursor-pointer border border-[#D4AF37]/30 px-3 py-1">
-            CLOSE_ESC
+          <div className="absolute top-5 right-5 text-[#D4AF37] font-mono text-[10px] cursor-pointer tracking-widest bg-black/50 px-3 py-1 border border-white/10">
+            [ CLOSE_ESC ]
           </div>
         </div>
       )}
@@ -53,49 +53,51 @@ export default function Products() {
       <nav className="p-4 md:px-12 flex justify-between items-center sticky top-0 bg-[#0A0A0A]/90 backdrop-blur-lg z-50 border-b border-[#D4AF37]/10">
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse shadow-[0_0_12px_#D4AF37]"></div>
+            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></div>
             <span className="text-[#D4AF37] font-bold tracking-[0.3em] text-sm md:text-xl font-mono uppercase">Shuo_Vision_Lab</span>
           </div>
         </Link>
         <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase tracking-[0.2em] font-bold text-white/70">
-          <Link href="/about"><a className="hover:text-[#D4AF37] transition-all">About</a></Link>
-          <Link href="/services"><a className="hover:text-[#D4AF37] transition-all">Services</a></Link>
+          <Link href="/about"><a>About</a></Link>
+          <Link href="/services"><a>Services</a></Link>
           <Link href="/products"><a className="text-[#D4AF37]">Products</a></Link>
           <Link href="/contact">
-            <a className="px-6 py-2 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-500 rounded-full bg-[#D4AF37]/5 text-[9px] md:text-xs">CONTACT</a>
+            <a className="px-5 py-1.5 border border-[#D4AF37]/40 text-[#D4AF37] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all">CONTACT</a>
           </Link>
         </div>
       </nav>
 
-      <main className="max-w-5xl mx-auto py-24 px-6 relative z-10">
-        <header className="mb-20">
-          <h2 className="text-[#D4AF37] font-mono tracking-[0.5em] text-[10px] mb-2 uppercase opacity-40">Lab_Inventory</h2>
+      <main className="max-w-5xl mx-auto py-20 px-6 relative z-10">
+        <header className="mb-16">
+          <h2 className="text-[#D4AF37] font-mono tracking-[0.5em] text-[9px] mb-2 uppercase opacity-40 italic">Lab_Inventory</h2>
           <h1 className="text-3xl md:text-5xl font-light tracking-tighter mb-6">產品與 <span className="text-[#D4AF37] font-serif italic">預覽。</span></h1>
-          <div className="w-10 h-[1px] bg-[#D4AF37]/50"></div>
+          <div className="w-10 h-[1px] bg-[#D4AF37]/30"></div>
         </header>
 
-        {/* 產品展示區：極簡、精確 */}
-        <div className="space-y-8">
+        {/* 產品清單 */}
+        <div className="space-y-6">
           {products.map((item) => (
-            <div key={item.id} className="p-6 md:p-8 border border-white/5 bg-[#0D0D0D]/30 hover:border-[#D4AF37]/20 transition-all duration-500 group relative">
+            <div key={item.id} className="p-6 md:p-8 border border-white/5 bg-[#0D0D0D]/40 hover:border-[#D4AF37]/20 transition-all duration-500 group relative">
               
-              <div className="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12">
-                {/* 1. 左側文字內容 */}
+              {/* 強制橫向佈局：文字在左，圖片在右 */}
+              <div className="flex items-start gap-6 md:gap-12">
+                
+                {/* 1. 左側文字內容 (flex-1 會佔據剩餘的所有空間) */}
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <h4 className="text-xl md:text-2xl font-light group-hover:text-[#D4AF37] transition-colors">{item.name}</h4>
-                    <span className="text-[#D4AF37] border border-[#D4AF37]/20 text-[8px] font-bold px-2 py-0.5 rounded animate-pulse">
+                  <div className="flex items-center gap-3 mb-4">
+                    <h4 className="text-lg md:text-2xl font-light group-hover:text-[#D4AF37] transition-colors">{item.name}</h4>
+                    <span className="text-[#D4AF37] border border-[#D4AF37]/20 text-[7px] font-bold px-1.5 py-0.5 rounded animate-pulse">
                       {item.status}
                     </span>
                   </div>
                   
-                  <p className="text-zinc-500 text-sm leading-relaxed mb-6 max-w-xl italic border-l border-white/10 pl-5">
+                  <p className="text-zinc-500 text-xs md:text-sm leading-relaxed mb-6 italic border-l border-white/10 pl-4">
                     {item.desc}
                   </p>
 
-                  <div className="flex flex-wrap gap-5">
+                  <div className="flex flex-wrap gap-4">
                     {item.features.map(feat => (
-                      <div key={feat} className="text-[10px] font-mono text-zinc-600 flex items-center gap-2">
+                      <div key={feat} className="text-[9px] font-mono text-zinc-600 flex items-center gap-1.5">
                         <div className="w-1 h-1 bg-[#D4AF37]/30 rounded-full"></div>
                         {feat}
                       </div>
@@ -103,10 +105,10 @@ export default function Products() {
                   </div>
                 </div>
 
-                {/* 2. 右側縮圖 (鎖定為 160px，縮圖感最強) */}
-                <div className="shrink-0 w-full md:w-40 h-auto aspect-square relative overflow-hidden group cursor-zoom-in border border-white/5 group-hover:border-[#D4AF37]/40 transition-all duration-500 bg-black">
+                {/* 2. 右側縮圖 (固定尺寸：w-24 到 w-32) */}
+                <div className="shrink-0">
                   <div 
-                    className="w-full h-full"
+                    className="w-24 h-24 md:w-32 md:h-32 relative cursor-zoom-in border border-white/5 bg-black group-hover:border-[#D4AF37]/40 transition-all duration-500 overflow-hidden"
                     onClick={() => setSelectedImg(item.image)}
                   >
                     <img 
@@ -114,13 +116,12 @@ export default function Products() {
                       alt={item.name} 
                       className="w-full h-full object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
                     />
-                    {/* 掃描線裝飾 */}
-                    <div className="absolute inset-x-0 h-[1px] bg-[#D4AF37]/20 top-0 group-hover:animate-[scan_2s_linear_infinite] opacity-0 group-hover:opacity-100"></div>
+                    {/* 掃描裝飾 */}
+                    <div className="absolute inset-x-0 h-[1px] bg-[#D4AF37]/30 top-0 group-hover:animate-[scan_1.5s_linear_infinite] opacity-0 group-hover:opacity-100"></div>
                   </div>
                 </div>
 
               </div>
-              <span className="absolute bottom-2 right-4 text-[24px] font-mono font-bold text-white/[0.02] pointer-events-none uppercase tracking-tighter">{item.id}</span>
             </div>
           ))}
         </div>
@@ -133,9 +134,9 @@ export default function Products() {
           }
         `}} />
 
-        <footer className="mt-32 py-10 text-center">
+        <footer className="mt-24 pt-10 border-t border-white/5 text-center">
           <Link href="/contact">
-            <a className="text-[#D4AF37] font-mono text-[10px] tracking-[0.4em] hover:text-white transition-all">
+            <a className="text-[#D4AF37] font-mono text-[9px] tracking-[0.4em] hover:text-white transition-all uppercase">
               [ INITIATE_PROJECT_ENQUIRY ]
             </a>
           </Link>
