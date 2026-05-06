@@ -5,44 +5,39 @@ import { useEffect, useRef } from "react";
 export default function Services() {
   const codeBgRef = useRef(null);
 
-  // JavaScript 腳本：動態生成程式碼數據流 (移除網格)
   useEffect(() => {
     const codeBg = codeBgRef.current;
     if (!codeBg) return;
 
-    // 清空舊內容 (確保不重複生成)
     codeBg.innerHTML = '';
-
-    const streams = 30; // 數據束的數量
-    const characters = "01/"; // 數據束使用的字元
+    const streams = 40; // 稍微增加數量
+    const characters = "01/";
 
     for (let i = 0; i < streams; i++) {
       const stream = document.createElement('div');
       stream.style.cssText = `
         position: absolute;
         top: 0;
-        font-family: monospace;
-        font-size: 10px;
-        color: rgba(212, 175, 55, 0.4); /* 淡淡淡淡淡淡金 */
+        font-family: 'Courier New', monospace;
+        font-size: 11px;
+        color: rgba(212, 175, 55, 0.7); /* 提高單條數據的亮度 */
         white-space: pre;
         pointer-events: none;
-        opacity: 0.7;
+        font-weight: bold;
       `;
 
-      // 隨機初始位置、速度與內容長度
       stream.style.left = `${Math.random() * 100}%`;
-      stream.style.animation = `codeFlow ${Math.random() * 15 + 10}s linear infinite`; // 10-25s 隨機速度
-      stream.style.animationDelay = `${Math.random() * 10}s`; // 隨機延遲
+      stream.style.animation = `codeFlow ${Math.random() * 10 + 8}s linear infinite`; 
+      stream.style.animationDelay = `${Math.random() * -20}s`; // 讓動畫一開始就充滿畫面
       
       let content = "";
-      const length = Math.random() * 50 + 20; // 每束數據的長度
+      const length = Math.random() * 60 + 30;
       for (let j = 0; j < length; j++) {
         content += characters.charAt(Math.random() * characters.length);
-        if (Math.random() < 0.1) content += " //_Opt()_"; // 隨機加入註解
-        if (Math.random() < 0.2) content += "\n"; // 隨機換行
+        if (Math.random() < 0.1) content += " <SYSTEM_OK> ";
+        if (Math.random() < 0.15) content += "\n";
       }
       stream.textContent = content;
-
       codeBg.appendChild(stream);
     }
   }, []);
@@ -77,30 +72,27 @@ export default function Services() {
         <title>Services | SHUO VISION LAB</title>
       </Head>
 
-      {/* 定義數據流動動畫 (放在 style 中確保全域生效) */}
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes codeFlow {
-          0% { transform: translateY(-100%) rotate(-15deg); opacity: 0; }
-          10% { opacity: 0.7; }
-          90% { opacity: 0.7; }
-          100% { transform: translateY(100vh) rotate(-15deg); opacity: 0; }
+          0% { transform: translateY(-110%) rotate(-15deg); }
+          100% { transform: translateY(110vh) rotate(-15deg); }
         }
       `}} />
 
-      {/* 2. 統一導覽列 유지 */}
+      {/* 導覽列 */}
       <nav className="p-4 md:px-12 flex justify-between items-center sticky top-0 bg-[#0A0A0A]/90 backdrop-blur-lg z-50 border-b border-[#D4AF37]/10">
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
             <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse shadow-[0_0_12px_#D4AF37]"></div>
-            <span className="text-[#D4AF37] font-bold tracking-[0.3em] text-sm md:text-xl font-mono group-hover:scale-105 transition-transform uppercase">
+            <span className="text-[#D4AF37] font-bold tracking-[0.3em] text-sm md:text-xl font-mono uppercase">
               Shuo_Vision_Lab
             </span>
           </div>
         </Link>
-        <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase tracking-[0.2em] items-center font-bold">
-          <Link href="/about"><a className="hover:text-[#D4AF37] transition-all text-white/70">About</a></Link>
+        <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase tracking-[0.2em] items-center font-bold text-white/70">
+          <Link href="/about"><a className="hover:text-[#D4AF37] transition-all">About</a></Link>
           <Link href="/services"><a className="text-[#D4AF37]">Services</a></Link>
-          <Link href="/products"><a className="hover:text-[#D4AF37] transition-all text-white/70">Products</a></Link>
+          <Link href="/products"><a className="hover:text-[#D4AF37] transition-all">Products</a></Link>
           <Link href="/contact">
             <a className="px-6 py-2 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-500 rounded-full bg-[#D4AF37]/5 text-[9px] md:text-xs">
               CONTACT_US
@@ -109,10 +101,9 @@ export default function Services() {
         </div>
       </nav>
 
-      {/* 3. 程式碼底圖層 (JavaScript 會填充這裡) */}
-      <div ref={codeBgRef} className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-[0.08]"></div>
+      {/* 數據流底圖 - 透明度提高到 0.25 */}
+      <div ref={codeBgRef} className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-[0.25]"></div>
 
-      {/* 服務標題 유지 */}
       <main className="max-w-6xl mx-auto py-24 px-6 relative z-10">
         <header className="mb-24">
           <h2 className="text-[#D4AF37] font-mono tracking-[0.6em] text-xs mb-4 uppercase opacity-60 italic">Engineering_Service_Catalog</h2>
@@ -120,10 +111,9 @@ export default function Services() {
           <div className="w-20 h-1 bg-[#D4AF37]"></div>
         </header>
 
-        {/* 服務項目網格 유지 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {serviceList.map((service) => (
-            <div key={service.id} className="relative group border border-white/5 bg-white/[0.01] p-10 hover:border-[#D4AF37]/40 transition-all duration-500">
+            <div key={service.id} className="relative group border border-white/5 bg-[#0D0D0D]/80 backdrop-blur-sm p-10 hover:border-[#D4AF37]/40 transition-all duration-500 shadow-2xl">
               <span className="absolute -top-4 -right-2 text-[80px] font-mono font-bold text-white/[0.03] group-hover:text-[#D4AF37]/5 transition-colors pointer-events-none select-none">{service.id}</span>
               <h3 className="text-[#D4AF37] font-mono text-xs tracking-[0.3em] mb-2">{service.title}</h3>
               <h4 className="text-xl md:text-2xl font-light mb-6 text-white group-hover:translate-x-2 transition-transform duration-300">{service.subtitle}</h4>
@@ -140,7 +130,6 @@ export default function Services() {
           ))}
         </div>
 
-        {/* 底部導引 유지 */}
         <section className="mt-40 py-20 text-center border-t border-white/5">
           <div className="flex justify-center items-center gap-4 mb-10 opacity-30">
             <div className="h-[1px] w-20 bg-[#D4AF37]"></div>
