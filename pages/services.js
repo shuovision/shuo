@@ -49,7 +49,9 @@ export default function Services() {
           <Link href="/about"><a className="hover:text-[#D4AF37] transition-all text-white/70">About</a></Link>
           <Link href="/services"><a className="text-[#D4AF37]">Services</a></Link>
           <Link href="/products"><a className="hover:text-[#D4AF37] transition-all text-white/70">Products</a></Link>
-          <Link href="/contact"><a className="px-5 py-1.5 border border-[#D4AF37]/40 text-[#D4AF37] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all">CONTACT</a></Link>
+          <Link href="/contact">
+            <a className="px-5 py-1.5 border border-[#D4AF37]/40 text-[#D4AF37] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all">CONTACT</a>
+          </Link>
         </div>
       </nav>
 
@@ -76,7 +78,7 @@ export default function Services() {
                 {service.tags.map(tag => (
                   <span key={tag} className="text-[8px] font-mono border border-zinc-800 px-2 py-1 text-zinc-600 group-hover:border-[#D4AF37]/20 group-hover:text-[#D4AF37]/50 transition-colors">
                     {tag}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
