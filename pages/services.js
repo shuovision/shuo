@@ -32,28 +32,66 @@ export default function Services() {
         <title>Services | SHUO VISION LAB</title>
       </Head>
 
-      {/* 座標網格背景 */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
-           style={{ backgroundImage: 'linear-gradient(#D4AF37 1px, transparent 1px), linear-gradient(90deg, #D4AF37 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
-      </div>
+      {/* 1. 全域特效 CSS - 建立程式碼數據流底圖 (移除網格) */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .code-bg {
+          position: fixed;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.05; /* 極淡淡淡淡，不搶主體 */
+          pointer-events: none;
+          background-image: 
+            linear-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+          background-size: 80px 80px, 120px 120px;
+          background-position: center;
+        }
 
-      {/* 統一導覽列 */}
+        .code-bg::before {
+          content: '01011010010001... // System_Optimize(); // [Works 2026]';
+          position: absolute;
+          font-family: monospace;
+          font-size: 10px;
+          line-height: 1.5;
+          color: #D4AF37;
+          width: 200%;
+          height: 100%;
+          white-space: pre-wrap;
+          overflow: hidden;
+          opacity: 0.7;
+          animation: codeFlow 30s linear infinite;
+        }
+
+        @keyframes codeFlow {
+          0% { transform: translateY(-50%) rotate(-15deg); }
+          100% { transform: translateY(50%) rotate(-15deg); }
+        }
+      `}} />
+
+      {/* 2. 統一導覽列 */}
       <nav className="p-4 md:px-12 flex justify-between items-center sticky top-0 bg-[#0A0A0A]/90 backdrop-blur-lg z-50 border-b border-[#D4AF37]/10">
         <Link href="/">
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></div>
-            <span className="text-[#D4AF37] font-bold tracking-[0.3em] text-sm md:text-xl font-mono uppercase">Shuo_Vision_Lab</span>
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <div className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse shadow-[0_0_12px_#D4AF37]"></div>
+            <span className="text-[#D4AF37] font-bold tracking-[0.3em] text-sm md:text-xl font-mono group-hover:scale-105 transition-transform uppercase">
+              Shuo_Vision_Lab
+            </span>
           </div>
         </Link>
-        <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase font-bold tracking-widest items-center">
+        <div className="flex gap-4 md:gap-10 text-[10px] md:text-xs uppercase tracking-[0.2em] items-center font-bold">
           <Link href="/about"><a className="hover:text-[#D4AF37] transition-all text-white/70">About</a></Link>
           <Link href="/services"><a className="text-[#D4AF37]">Services</a></Link>
           <Link href="/products"><a className="hover:text-[#D4AF37] transition-all text-white/70">Products</a></Link>
           <Link href="/contact">
-            <a className="px-5 py-1.5 border border-[#D4AF37]/40 text-[#D4AF37] rounded-full hover:bg-[#D4AF37] hover:text-black transition-all">CONTACT</a>
+            <a className="px-6 py-2 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-500 rounded-full bg-[#D4AF37]/5 text-[9px] md:text-xs">
+              CONTACT_US
+            </a>
           </Link>
         </div>
       </nav>
+
+      {/* 3. 程式碼底圖層 */}
+      <div className="code-bg"></div>
 
       {/* 服務標題 */}
       <main className="max-w-6xl mx-auto py-24 px-6 relative z-10">
@@ -63,13 +101,11 @@ export default function Services() {
           <div className="w-20 h-1 bg-[#D4AF37]"></div>
         </header>
 
-        {/* 服務項目網格 */}
+        {/* 服務項目網格 유지 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {serviceList.map((service) => (
             <div key={service.id} className="relative group border border-white/5 bg-white/[0.01] p-10 hover:border-[#D4AF37]/40 transition-all duration-500">
-              {/* 背景序號裝飾 */}
               <span className="absolute -top-4 -right-2 text-[80px] font-mono font-bold text-white/[0.03] group-hover:text-[#D4AF37]/5 transition-colors pointer-events-none select-none">{service.id}</span>
-              
               <h3 className="text-[#D4AF37] font-mono text-xs tracking-[0.3em] mb-2">{service.title}</h3>
               <h4 className="text-xl md:text-2xl font-light mb-6 text-white group-hover:translate-x-2 transition-transform duration-300">{service.subtitle}</h4>
               <p className="text-zinc-500 text-sm leading-relaxed mb-10 min-h-[100px]">{service.desc}</p>
@@ -85,7 +121,7 @@ export default function Services() {
           ))}
         </div>
 
-        {/* 底部導引 */}
+        {/* 底部導引 유지 */}
         <section className="mt-40 py-20 text-center border-t border-white/5">
           <div className="flex justify-center items-center gap-4 mb-10 opacity-30">
             <div className="h-[1px] w-20 bg-[#D4AF37]"></div>
@@ -95,7 +131,7 @@ export default function Services() {
           <h3 className="text-2xl md:text-4xl font-light mb-12">我們協助您從原型開發 <br/>走入 <span className="text-[#D4AF37] font-serif italic tracking-wide">量產應用的最終環節。</span></h3>
           <Link href="/contact">
             <a className="inline-block px-12 py-4 border border-[#D4AF37] text-[#D4AF37] uppercase tracking-[0.2em] font-bold text-xs hover:bg-[#D4AF37] hover:text-black transition-all">
-              取得技術支援
+              啟動技術支援
             </a>
           </Link>
         </section>
