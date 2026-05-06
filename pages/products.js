@@ -11,7 +11,7 @@ export default function Products() {
       name: "Ameba Tutor Elf",
       status: "COMING_SOON",
       category: "AI_Education_Kit",
-      image: "/images/tutor_elf.png",
+      image: "/images/tutor_elf.png", // 請確保圖片路徑正確
       desc: "專為嵌入式學習打造的 AI 智慧助教。內建 Ameba 8735B 核心，具備 AI 視覺辨識與語音互動能力，協助開發者快速掌握 IoT 核心技術。",
       features: ["AMB82-mini Core", "AI Camera System", "Audio Interactive"]
     },
@@ -20,7 +20,7 @@ export default function Products() {
       name: "Wireless Audio System",
       status: "COMING_SOON",
       category: "Audio_Processing",
-      image: "/images/wireless_audio.png",
+      image: "/images/wireless_audio.png", // 請確保圖片路徑正確
       desc: "高性能無線音訊傳輸方案。採用自主研發的同步算法與隔離技術，實現低於 20ms 的超低延遲，為專業音響改裝提供極致穩定性。",
       features: ["24-bit/96kHz Hi-Res", "Latency < 20ms", "Zero Ground Noise"]
     }
@@ -119,8 +119,8 @@ export default function Products() {
                   </div>
                 </div>
 
-                {/* 2. 右側縮圖 (點擊開啟 Modal) */}
-                <div className="w-full md:w-56 lg:w-72 order-1 md:order-2">
+                {/* 2. 右側縮圖 (關鍵修改：限縮寬度) */}
+                <div className="w-full md:w-32 lg:w-40 order-1 md:order-2">
                   <div 
                     className="relative aspect-square cursor-zoom-in overflow-hidden border border-white/5 group-hover:border-[#D4AF37]/40 transition-all shadow-xl bg-black"
                     onClick={() => setSelectedImg(item.image)}
@@ -128,11 +128,11 @@ export default function Products() {
                     <img 
                       src={item.image} 
                       alt={item.name} 
-                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                      className="w-full h-full object-contain opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     />
                     {/* 掃描裝飾小圖示 */}
                     <div className="absolute bottom-2 right-2 p-1 bg-black/50 backdrop-blur-md border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                     </div>
                   </div>
                 </div>
