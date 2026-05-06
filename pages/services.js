@@ -1,7 +1,52 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 
 export default function Services() {
+  const codeBgRef = useRef(null);
+
+  // JavaScript 腳本：動態生成程式碼數據流 (移除網格)
+  useEffect(() => {
+    const codeBg = codeBgRef.current;
+    if (!codeBg) return;
+
+    // 清空舊內容 (確保不重複生成)
+    codeBg.innerHTML = '';
+
+    const streams = 30; // 數據束的數量
+    const characters = "01/"; // 數據束使用的字元
+
+    for (let i = 0; i < streams; i++) {
+      const stream = document.createElement('div');
+      stream.style.cssText = `
+        position: absolute;
+        top: 0;
+        font-family: monospace;
+        font-size: 10px;
+        color: rgba(212, 175, 55, 0.4); /* 淡淡淡淡淡淡金 */
+        white-space: pre;
+        pointer-events: none;
+        opacity: 0.7;
+      `;
+
+      // 隨機初始位置、速度與內容長度
+      stream.style.left = `${Math.random() * 100}%`;
+      stream.style.animation = `codeFlow ${Math.random() * 15 + 10}s linear infinite`; // 10-25s 隨機速度
+      stream.style.animationDelay = `${Math.random() * 10}s`; // 隨機延遲
+      
+      let content = "";
+      const length = Math.random() * 50 + 20; // 每束數據的長度
+      for (let j = 0; j < length; j++) {
+        content += characters.charAt(Math.random() * characters.length);
+        if (Math.random() < 0.1) content += " //_Opt()_"; // 隨機加入註解
+        if (Math.random() < 0.2) content += "\n"; // 隨機換行
+      }
+      stream.textContent = content;
+
+      codeBg.appendChild(stream);
+    }
+  }, []);
+
   const serviceList = [
     {
       id: "01",
@@ -32,43 +77,17 @@ export default function Services() {
         <title>Services | SHUO VISION LAB</title>
       </Head>
 
-      {/* 1. 全域特效 CSS - 建立程式碼數據流底圖 (移除網格) */}
+      {/* 定義數據流動動畫 (放在 style 中確保全域生效) */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .code-bg {
-          position: fixed;
-          inset: 0;
-          z-index: 0;
-          opacity: 0.05; /* 極淡淡淡淡，不搶主體 */
-          pointer-events: none;
-          background-image: 
-            linear-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
-          background-size: 80px 80px, 120px 120px;
-          background-position: center;
-        }
-
-        .code-bg::before {
-          content: '01011010010001... // System_Optimize(); // [Works 2026]';
-          position: absolute;
-          font-family: monospace;
-          font-size: 10px;
-          line-height: 1.5;
-          color: #D4AF37;
-          width: 200%;
-          height: 100%;
-          white-space: pre-wrap;
-          overflow: hidden;
-          opacity: 0.7;
-          animation: codeFlow 30s linear infinite;
-        }
-
         @keyframes codeFlow {
-          0% { transform: translateY(-50%) rotate(-15deg); }
-          100% { transform: translateY(50%) rotate(-15deg); }
+          0% { transform: translateY(-100%) rotate(-15deg); opacity: 0; }
+          10% { opacity: 0.7; }
+          90% { opacity: 0.7; }
+          100% { transform: translateY(100vh) rotate(-15deg); opacity: 0; }
         }
       `}} />
 
-      {/* 2. 統一導覽列 */}
+      {/* 2. 統一導覽列 유지 */}
       <nav className="p-4 md:px-12 flex justify-between items-center sticky top-0 bg-[#0A0A0A]/90 backdrop-blur-lg z-50 border-b border-[#D4AF37]/10">
         <Link href="/">
           <div className="flex items-center gap-3 cursor-pointer group">
@@ -90,10 +109,10 @@ export default function Services() {
         </div>
       </nav>
 
-      {/* 3. 程式碼底圖層 */}
-      <div className="code-bg"></div>
+      {/* 3. 程式碼底圖層 (JavaScript 會填充這裡) */}
+      <div ref={codeBgRef} className="fixed inset-0 z-0 overflow-hidden pointer-events-none opacity-[0.08]"></div>
 
-      {/* 服務標題 */}
+      {/* 服務標題 유지 */}
       <main className="max-w-6xl mx-auto py-24 px-6 relative z-10">
         <header className="mb-24">
           <h2 className="text-[#D4AF37] font-mono tracking-[0.6em] text-xs mb-4 uppercase opacity-60 italic">Engineering_Service_Catalog</h2>
