@@ -95,7 +95,7 @@ export default function Services() {
           <Link href="/products"><a className="hover:text-[#D4AF37] transition-all">Products</a></Link>
           <Link href="/contact">
             <a className="px-6 py-2 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black transition-all duration-500 rounded-full bg-[#D4AF37]/5 text-[9px] md:text-xs">
-              CONTACT_US
+              CONTACT
             </a>
           </Link>
         </div>
