@@ -53,7 +53,7 @@ export default function Contact() {
                   <span className="text-[#D4AF37]/50">[TIME_ZONE]</span> GMT+8 (Taipei)
                 </p>
                 <p className="flex items-center gap-4 hover:text-[#D4AF37] transition-colors cursor-pointer">
-                  <span className="text-[#D4AF37]/50">[ENCRYPTED_MAIL]</span> shuo.vision.lab@gmail.com
+                  <span className="text-[#D4AF37]/50">[ENCRYPTED_MAIL]</span> shuovision@gmail.com
                 </p>
               </div>
             </div>
